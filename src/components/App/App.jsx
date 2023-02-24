@@ -1,6 +1,9 @@
-import Form from 'components/Form/Form';
+import ContactList from 'components/ContactList';
+import Filter from 'components/Filter';
+import Form from 'components/SectionForm';
 import { nanoid } from 'nanoid';
 import React, { Component } from 'react';
+import styles from './app.module.css';
 
 export class App extends Component {
   state = {
@@ -15,12 +18,18 @@ export class App extends Component {
 
   onSubmmitAddContact = ({ name, number }) => {
     const { contacts } = this.state;
-
     const newContact = {
       name,
       number,
       id: nanoid(),
     };
+
+    const validContacts = contacts.map(({ name }) => name.toLowerCase());
+    const nameToLowerCase = name.toLowerCase();
+
+    if (validContacts.includes(nameToLowerCase)) {
+      return alert(`${name} is already in contacs.`);
+    }
 
     this.setState(prevState => ({
       contacts: [newContact, ...prevState.contacts],
@@ -38,29 +47,27 @@ export class App extends Component {
     );
   };
 
+  deleteContacts = contactsId => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== contactsId),
+    }));
+  };
+
   render() {
     const { filter } = this.state;
     const onfilteredContacts = this.onFilteredContacts();
     return (
-      <div>
+      <div className={styles.container}>
+        <h1 className={styles.title}>Phonebook</h1>
         <Form onSubmit={this.onSubmmitAddContact} />
-        <div>
-          <h2>Contacts</h2>
-          <label>
-            Find contacts by name
-            <input
-              type="text"
-              value={filter}
-              onChange={this.handleChangeFilter}
-            />
-          </label>
-          <ul>
-            {onfilteredContacts.map(({ name, number, id }) => (
-              <li key={id}>
-                {name}: {number}
-              </li>
-            ))}
-          </ul>
+
+        <h2 className={styles.title}>Contacts</h2>
+        <div className={styles.contactListContainer}>
+          <Filter InputValue={filter} onChange={this.handleChangeFilter} />
+          <ContactList
+            contacts={onfilteredContacts}
+            onDeleteContacts={this.deleteContacts}
+          />
         </div>
       </div>
     );
