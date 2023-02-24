@@ -1,5 +1,5 @@
 import { nanoid } from 'nanoid';
-import Rreact, { Component } from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class Form extends Component {
