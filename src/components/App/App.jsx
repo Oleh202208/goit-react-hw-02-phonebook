@@ -14,7 +14,7 @@ const ListItem = [
 
 export class App extends Component {
   state = {
-    contacts: [],
+    contacts: [...ListItem],
     filter: '',
   };
 
@@ -67,7 +67,7 @@ export class App extends Component {
         <div className={styles.contactListContainer}>
           <Filter InputValue={filter} onChange={this.handleChangeFilter} />
           <ContactList
-            contacts={(onfilteredContacts, ListItem)}
+            contacts={onfilteredContacts}
             onDeleteContacts={this.deleteContacts}
           />
         </div>
