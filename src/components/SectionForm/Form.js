@@ -9,9 +9,6 @@ class Form extends Component {
     number: '',
   };
 
-  nameInputId = nanoid();
-  numberInputId = nanoid();
-
   handleChange = e => {
     const { name, value } = e.currentTarget;
     this.setState({
@@ -36,7 +33,7 @@ class Form extends Component {
     return (
       <form className={styles.form} onSubmit={this.handleSubmit}>
         <div className={styles.wrapper}>
-          <label className={styles.label} htmlFor={this.nameInputId}>
+          <label className={styles.label}>
             Name
             <input
               type="text"
@@ -46,10 +43,9 @@ class Form extends Component {
               required
               value={this.state.name}
               onChange={this.handleChange}
-              id={this.nameInputId}
             />
           </label>
-          <label className={styles.label} htmlFor={this.numberInputId}>
+          <label className={styles.label}>
             Number
             <input
               type="tel"
@@ -59,7 +55,6 @@ class Form extends Component {
               required
               value={this.state.number}
               onChange={this.handleChange}
-              id={this.numberInputId}
             />
           </label>
           <button className={styles.button} type="submit">
