@@ -22,6 +22,7 @@ const ContactList = ({ contacts, onDeleteContacts }) => {
 
 ContactList.propTypes = {
   contacts: PropTypes.array.isRequired,
+  onDeleteContacts: PropTypes.func.isRequired,
 };
 
 export default ContactList;
