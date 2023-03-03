@@ -7,7 +7,11 @@ const ContactItem = ({ name, number, id, onClick }) => {
       <span>
         {name}: {number}
       </span>
-      <button type="button" onClick={() => onClick(id)}>
+      <button
+        className={styles.buttonDelete}
+        type="button"
+        onClick={() => onClick(id)}
+      >
         Delete
       </button>
     </li>
