@@ -20,19 +20,17 @@ export class App extends Component {
 
   onSubmmitAddContact = ({ name, number }) => {
     const { contacts } = this.state;
-    const newContact = {
-      name,
-      number,
-      id: nanoid(),
-    };
-
     const validContacts = contacts.map(({ name }) => name.toLowerCase());
     const nameToLowerCase = name.toLowerCase();
 
     if (validContacts.includes(nameToLowerCase)) {
       return alert(`${name} is already in contacs.`);
     }
-
+    const newContact = {
+      name,
+      number,
+      id: nanoid(),
+    };
     this.setState(prevState => ({
       contacts: [newContact, ...prevState.contacts],
     }));
@@ -62,7 +60,6 @@ export class App extends Component {
       <div className={styles.container}>
         <h1 className={styles.title}>Phonebook</h1>
         <Form onSubmit={this.onSubmmitAddContact} />
-
         <h2 className={styles.title}>Contacts</h2>
         <div className={styles.contactListContainer}>
           <Filter InputValue={filter} onChange={this.handleChangeFilter} />
